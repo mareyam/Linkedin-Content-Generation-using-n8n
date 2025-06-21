@@ -5,6 +5,7 @@ import { Button } from './components/ui/button';
 import NicheSelection2 from './components/layout/home/niche-selection2';
 import SubNiche from './components/layout/home/sub-niche';
 import N8nGeneratedContent from './components/layout/home/n8n-generated-content';
+import Introduction from './components/layout/home/introduction';
 
 const Home = () => {
   const [selectedNiche, setSelectedNiche] = useState({
@@ -62,52 +63,63 @@ const Home = () => {
     }
   };
 
+  const [isIntro, setIsIntro] = useState(true);
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-6 overflow-hidden">
-      {n8nResponse ? (
-        <N8nGeneratedContent
-          n8nResponse={n8nResponse}
-          setN8nResponse={setN8nResponse}
-        />
+      {isIntro ? (
+        <Introduction setIsIntro={setIsIntro} />
       ) : (
-        <div className="bg-white p-10 rounded-lg shadow-xl w-full overflow-y-none  ">
-          <div className="flex flex-row space-x-6 ">
-            <div className="w-1/2 space-y-12">
-              <NicheSelection2
-                selectedNiche={selectedNiche}
-                setSelectedNiche={setSelectedNiche}
-                setSubNiches={setSubNiches}
-              />
-              <SubNiche
-                subNiches={subNiches}
-                setSelectedSubNiche={setSelectedSubNiche}
-                selectedSubNiche={selectedSubNiche}
-                selectedNiche={selectedNiche}
-                setSubNiches={setSubNiches}
-              />
-              <ContentGoalForm setGoalData={setGoalData} goalData={goalData} />
-            </div>
+        <>
+          {n8nResponse ? (
+            <N8nGeneratedContent
+              n8nResponse={n8nResponse}
+              setN8nResponse={setN8nResponse}
+            />
+          ) : (
+            <div className="bg-white p-10 rounded-lg shadow-xl w-full overflow-y-none  ">
+              <div className="flex flex-row space-x-6 ">
+                <div className="w-1/2 space-y-12">
+                  <NicheSelection2
+                    selectedNiche={selectedNiche}
+                    setSelectedNiche={setSelectedNiche}
+                    setSubNiches={setSubNiches}
+                  />
+                  <SubNiche
+                    subNiches={subNiches}
+                    setSelectedSubNiche={setSelectedSubNiche}
+                    selectedSubNiche={selectedSubNiche}
+                    selectedNiche={selectedNiche}
+                    setSubNiches={setSubNiches}
+                  />
+                  <ContentGoalForm
+                    setGoalData={setGoalData}
+                    goalData={goalData}
+                  />
+                </div>
 
-            <div className="w-1/2 space-y-12">
-              <ContentGenerationSettings
-                setTone={setTone}
-                setPostLength={setPostLength}
-                setIndustry={setIndustry}
-                setImageIncluded={setImageIncluded}
-                setHashtags={setHashtags}
-                setTagging={setTagging}
-              />
-              <CustomPrompt prompt={prompt} setPrompt={setPrompt} />
-            </div>
-          </div>
+                <div className="w-1/2 space-y-12">
+                  <ContentGenerationSettings
+                    setTone={setTone}
+                    setPostLength={setPostLength}
+                    setIndustry={setIndustry}
+                    setImageIncluded={setImageIncluded}
+                    setHashtags={setHashtags}
+                    setTagging={setTagging}
+                  />
+                  <CustomPrompt prompt={prompt} setPrompt={setPrompt} />
+                </div>
+              </div>
 
-          <Button
-            className="bg-neutral-900 hover:bg-neutral-800 text-white p-8 rounded-md w-full mt-4"
-            onClick={handleSubmit}
-          >
-            🚀 Generate Content
-          </Button>
-        </div>
+              <Button
+                className="bg-neutral-900 hover:bg-neutral-800 text-white p-8 rounded-md w-full mt-4"
+                onClick={handleSubmit}
+              >
+                🚀 Generate Content
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

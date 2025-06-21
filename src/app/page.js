@@ -2,9 +2,9 @@
 import './globals.css';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import N8nGeneratedContent from '@/components/layout/home/n8n-generated-content';
-import NicheSelection2 from '@/components/layout/home/niche-selection2';
-import SubNiche from '@/components/layout/home/sub-niche';
+import NicheSelection2 from '../components/layout/home/niche-selection2';
+import SubNiche from '../components/layout/home/sub-niche';
+import N8NGeneratedContent from '../components/layout/home/n8n-generated-content';
 
 const Home = () => {
   const [selectedNiche, setSelectedNiche] = useState({
